@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+      <div class="content">
+        <div class="keys">
+          <div data-key="69" class="key">
+            <kbd>E</kbd>
+            <span class="sound">Side-stick</span>
+          </div>
+          <div data-key="82" class="key">
+            <kbd>R</kbd>
+            <span class="sound">Clap</span>
+          </div>
+          <div data-key="84" class="key">
+            <kbd>T</kbd>
+            <span class="sound">Hi-hat</span>
+          </div>
+          <div data-key="89" class="key">
+            <kbd>Y</kbd>
+            <span class="sound">close-hat</span>
+          </div>
+          <div data-key="85" class="key">
+            <kbd>U</kbd>
+            <span class="sound">Crush</span>
+          </div>
+          <div data-key="73" class="key">
+            <kbd>I</kbd>
+            <span class="sound">Ride</span>
+          </div>
+        </div>
+        <div class="keys">
+          <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">Kick</span>
+          </div>
+          <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">Kick</span>
+          </div>
+          <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">Snare</span>
+          </div>
+          <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">Snare</span>
+          </div>
+          <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">Floor-tom</span>
+          </div>
+          <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">Mid-tom</span>
+          </div>
+          <div data-key="74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">High-tom</span>
+          </div>
+          <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">crush</span>
+          </div>
+          <div data-key="76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">Ride</span>
+          </div>
+        </div>
+      </div>
+
+    <audio data-key="69" src="sounds/snare/RD_S_16.wav"></audio>
+    <audio data-key="82" src="sounds/Claps/clap.wav"></audio>
+    <audio data-key="84" src="sounds/Cymbals/Hi Hat/RD_C_HH_1.wav"></audio>
+    <audio data-key="89" src="sounds/Cymbals/Hi Hat/RD_C_HH_7.wav"></audio>
+    <audio data-key="85" src="sounds/Cymbals/Crash/RD_C_C_1.wav"></audio>
+    <audio data-key="73" src="sounds/Cymbals/Ride/RD_C_R_1.wav"></audio>
+
+    <audio data-key="65" src="sounds/Kick/RD_K_1.wav"></audio>
+    <audio data-key="83" src="sounds/Kick/kick.wav"></audio>
+    <audio data-key="68" src="sounds/Snare/RD_S_1.wav"></audio>
+    <audio data-key="70" src="sounds/Snare/Processed/RD_S_P_1.wav"></audio>
+    <audio data-key="71" src="sounds/Toms/Floor Tom/RD_T_FT_1.wav"></audio>
+    <audio data-key="72" src="sounds/Toms/Mid Tom/RD_T_MT_1.wav"></audio>
+    <audio data-key="74" src="sounds/Toms/High Tom/RD_T_HT_1.wav"></audio>
+    <audio data-key="75" src="sounds/Cymbals/Crash/RD_C_C_1.wav"></audio>
+    <audio data-key="76" src="sounds/Cymbals/Ride/RD_C_R_1.wav"></audio>
+
+    
+    
+
+    <script>
+      function playSound(e){
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+        if(!audio) return;
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add('playing');
+      };
+
+      function removeTransition(e){
+        if (e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(key => key.addEventListener('transitionend', removeTransition))
+
+      window.addEventListener('keydown', playSound)
+    </script>
+  </body>
+</html>
